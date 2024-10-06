@@ -11,7 +11,7 @@ if img is None:
     exit()
 
 
-# Function to find the threshold where tf1 is nearly 2 * tf2
+# Function to find the threshold where tf1 is approximately equal to tf2
 def find_threshold(image):
     # Flatten the image to a 1D array for easier manipulation
     pixel_values = image.ravel()
@@ -22,8 +22,8 @@ def find_threshold(image):
         tf1 = np.sum(pixel_values <= threshold)
         tf2 = np.sum(pixel_values > threshold)
 
-        # Check if tf1 is approximately 2 times tf2
-        if abs(tf1 - 2 * tf2) <= total_pixels * 0.01:  # 1% tolerance
+        # Check if tf1 is approximately equal to tf2
+        if abs(tf1 - tf2) <= total_pixels * 0.01:  # 1% tolerance
             return threshold
 
     return 128  # If no threshold is found, return a default value (e.g., 128)
@@ -53,4 +53,4 @@ plt.axis("off")
 plt.show()
 
 # Print the threshold value
-print(f"The threshold where tf1 is approximately 2 * tf2: {threshold}")
+print(f"The threshold where tf1 is approximately equal to tf2: {threshold}")
